@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import { isBefore, isAfter, isEqual } from "date-fns";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
@@ -9,8 +8,8 @@ import {
   TodayButton,
   AppointmentForm,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import TopicForm from "../../components/TopicForm";
 
+import TopicForm from "./TopicForm";
 import Topic, { TopicType } from "./Topic";
 import DateNavigator from "./DateNavigator";
 
@@ -30,6 +29,7 @@ const MonthViewCell = ({
       {...restProps}
       startDate={startDate}
       onDoubleClick={onDoubleClick}
+      style={{ height: 500 }}
     />
   );
 };
@@ -66,18 +66,8 @@ export default function Planning({ data }: { data: TopicType[] }) {
         <DateNavigator date={currentDate} />
         <TodayButton />
 
-        <Appointments
-          // containerComponent={(props) => (
-          //   <Appointments.Container {...props} style={props.style} />
-          // )}
-          appointmentComponent={Topic}
-        />
+        <Appointments appointmentComponent={Topic} />
         <TopicForm />
-
-        {/* <AppointmentForm
-          visible={formVisible}
-          onVisibilityChange={(visible) => setFormVisible(visible)}
-        /> */}
 
         <AppointmentForm
           visible={formVisible}
