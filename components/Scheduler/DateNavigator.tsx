@@ -1,40 +1,38 @@
-import moment, { Moment } from "moment";
-import {
-  DateNavigator,
-  TodayButton,
-} from "@devexpress/dx-react-scheduler-material-ui";
+import { format, addMonths, subMonths } from "date-fns";
+import { DateNavigator } from "@devexpress/dx-react-scheduler-material-ui";
 import { Box, IconButton } from "@material-ui/core";
 import { ChevronLeft, ChevronRight, ArrowDropDown } from "@material-ui/icons";
 
-function RootComponent(props: DateNavigator.RootProps & { date: Moment }) {
+function RootComponent({
+  date,
+  onVisibilityToggle,
+  onNavigate,
+  ...components
+}: DateNavigator.RootProps & { date: Date }) {
   return (
     <Box ml={4} display="flex" width="100%" justifyContent="space-between">
       <Box display="flex" alignItems="center">
-        <p>{props.date.format("MMMM YYYY")}</p>
-        <props.openButtonComponent
-          onVisibilityToggle={props.onVisibilityToggle}
+        <p>{format(date, "MMMM yyyy")}</p>
+        <components.openButtonComponent
+          onVisibilityToggle={onVisibilityToggle}
         />
       </Box>
 
       <Box display="flex" alignItems="center">
-        <props.navigationButtonComponent
+        <components.navigationButtonComponent
           type="back"
-          onClick={() =>
-            props.onNavigate("back", props.date.subtract(1, "month").toDate())
-          }
+          onClick={() => onNavigate("back", subMonths(date, 1))}
         />
-        <props.navigationButtonComponent
+        <components.navigationButtonComponent
           type="forward"
-          onClick={() =>
-            props.onNavigate("back", props.date.add(1, "month").toDate())
-          }
+          onClick={() => onNavigate("forward", addMonths(date, 1))}
         />
       </Box>
     </Box>
   );
 }
 
-export default function Navigator({ date }: { date: Moment }) {
+export default function Navigator({ date }: { date: Date }) {
   return (
     <DateNavigator
       rootComponent={(props) => <RootComponent {...props} date={date} />}
