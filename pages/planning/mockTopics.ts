@@ -10,7 +10,7 @@ export interface Topic {
 export const topics: Topic[] = [
   {
     image: "https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg",
-    title: "All Nippon Airways Tokyo Campaign",
+    title: "Even longer and super long title loren ipsum to be the lip sum",
     startDate: "2021-04-15",
     // Non-inclusive
     endDate: "2021-04-16",

@@ -29,7 +29,7 @@ const MonthViewCell = ({
       {...restProps}
       startDate={startDate}
       onDoubleClick={onDoubleClick}
-      style={{ height: 500 }}
+      style={{ height: 200 }}
     />
   );
 };
